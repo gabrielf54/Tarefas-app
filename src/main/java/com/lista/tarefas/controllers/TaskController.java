@@ -2,6 +2,7 @@ package com.lista.tarefas.controllers;
 
 import com.lista.tarefas.entities.Task;
 import com.lista.tarefas.services.TaskService;
+//import com.lista.tarefas.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,22 +15,25 @@ import java.util.List;
 public class TaskController {
     @Autowired
     private TaskService taskService;
+//    @Autowired
+//    private UserService userService;
 
     @GetMapping
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
 
-@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
         Task task = taskService.getTaskById(id);
-        if(task != null) {
+        if (task != null) {
             return ResponseEntity.ok(task);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-@PostMapping
+
+    @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         Task createdTask = taskService.createTask(task);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
@@ -47,7 +51,7 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-        if(taskService.deleteTask(id)) {
+        if (taskService.deleteTask(id)) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();

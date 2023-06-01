@@ -25,6 +25,10 @@ public class Task {
     @Column(name = "reminder")
     private LocalDateTime reminder;
 
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
+
     public Task(String title, Long id, String description, LocalDate dueDate, String priority, boolean completed, LocalDateTime reminder) {
         this.title = title;
         this.id = id;
